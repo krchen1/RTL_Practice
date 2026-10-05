@@ -110,3 +110,11 @@ always_ff @(posedge clk) begin
 end
 
 assign {overflow, sum} = acc + in;
+
+// Much simpler method of coding a priority arbiter, first look at the logic that is required as
+// shown in Listing 4.
+always @(*) begin
+    grant[0] = req[0];
+    grant[1] = ~req[0] & req[1];
+    grant[2] = ~req[0] & ~req[1] & req[2];
+end
